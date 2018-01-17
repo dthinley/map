@@ -7,5 +7,6 @@ This is a single page application featuring a map of top 5 locations in San Fran
 1. Knockout JS
 2. Google Maps
 3. Foursquare
+3. Bootstrap
 
 
