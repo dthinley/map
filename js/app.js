@@ -1,3 +1,6 @@
+var map;
+var clientID;
+var clientSecret;
 var Location = function(data) {
 	var self = this;
 
@@ -74,6 +77,7 @@ function AppViewModel() {
 	var self = this;
 
 	this.searchLocation = ko.observable("");
+	
 	this.locationList = ko.observableArray([]);
 
 	map = new google.maps.Map(document.getElementById('map'), {
