@@ -26,7 +26,7 @@ var Location = function(data) {
     }).fail(function() {
         alert("Error found. Please refresh your page.");
     });
-
+// info window
     this.contentString = '<div class="info-window-content"><div class="title"><b>' + data.name + "</b></div>" +
         '<div class="content"><a href="' + self.URL + '">' + self.URL + "</a></div>" +
         '<div class="content">' + self.street + "</div>" +
@@ -36,7 +36,7 @@ var Location = function(data) {
     this.infoWindow = new google.maps.InfoWindow({
         content: self.contentString
     });
-
+//marker section
     this.marker = new google.maps.Marker({
         position: new google.maps.LatLng(data.lat, data.long),
         map: map,
