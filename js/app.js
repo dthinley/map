@@ -1,6 +1,6 @@
-var map;
-var clientID;
-var clientSecret;
+//global variables
+var clientID = "VZ2JT2MO24F4I1FISB1WHSM0UTMWCLMBF0GUVBBTOB5WXOAD";
+var clientSecret = "PQSBTUDULE4ML240LQKMH0EL5Y2SJQSDXNMKIQKJMGVCNMDH";
 var Location = function(data) {
     var self = this;
 
@@ -26,7 +26,9 @@ var Location = function(data) {
     }).fail(function() {
         alert("Error found. Please refresh your page.");
     });
-// info window
+
+    // Info window
+
     this.contentString = '<div class="info-window-content"><div class="title"><b>' + data.name + "</b></div>" +
         '<div class="content"><a href="' + self.URL + '">' + self.URL + "</a></div>" +
         '<div class="content">' + self.street + "</div>" +
@@ -36,7 +38,9 @@ var Location = function(data) {
     this.infoWindow = new google.maps.InfoWindow({
         content: self.contentString
     });
-//marker section
+
+    // Marker
+
     this.marker = new google.maps.Marker({
         position: new google.maps.LatLng(data.lat, data.long),
         map: map,
@@ -90,10 +94,6 @@ function AppViewModel() {
             lng: -122.429
         }
     });
-
-    // Foursquare API settings
-    clientID = "VZ2JT2MO24F4I1FISB1WHSM0UTMWCLMBF0GUVBBTOB5WXOAD";
-    clientSecret = "PQSBTUDULE4ML240LQKMH0EL5Y2SJQSDXNMKIQKJMGVCNMDH";
 
     initialLocations.forEach(function(locationItem) {
         self.locationList.push(new Location(locationItem));
