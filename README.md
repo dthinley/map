@@ -11,7 +11,7 @@ In order to get map google map functionality google map API is required. Full in
 3. Foursquare
 This project also use third party API that is four square. Details about foursquare API can be found at https://developer.foursquare.com/docs/api/getting-started
 
-Basic Instructions
+## Basic Instructions
 1.	Download the zip to a directory you'll be working in.
 2.	Unzip the file.
 3.	Open the index.html in a modern browser.
