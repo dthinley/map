@@ -1,4 +1,5 @@
 //global variables
+//Foursquare clientid and clientSecret
 var clientID = "VZ2JT2MO24F4I1FISB1WHSM0UTMWCLMBF0GUVBBTOB5WXOAD";
 var clientSecret = "PQSBTUDULE4ML240LQKMH0EL5Y2SJQSDXNMKIQKJMGVCNMDH";
 var Location = function(data) {
