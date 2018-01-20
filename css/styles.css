@@ -1,43 +1,34 @@
-html,
-body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
+html, body {
+     height: 100%;
+     margin: 0;
+     padding: 0;
 }
-
-#map {
-    height: 100%;
+ #map {
+     height: 100%;
 }
-
-.search {
-    margin: 8px;
-    display: flex;
+ .search {
+     margin: 8px;
+     display: flex;
 }
-
-.search-box {
-    display: flex;
-    font-size: 14px;
-    padding: 5px 0px;
+ .search-box {
+     display: flex;
+     font-size: 14px;
+     padding: 5px 0px;
 }
-
-.list {
-    list-style: none;
+ .list {
+     list-style: none;
 }
-
-.results {
-    margin: 5px;
-    padding: 2px;
+ .results {
+     margin: 5px;
+     padding: 2px;
 }
-
-.place  {
-    margin: 2px;
-    padding: 4px;
-    background-color: #eee;
-    cursor: pointer;
-    
+ .place {
+     margin: 2px;
+     padding: 4px;
+     background-color: #eee;
+     cursor: pointer;
 }
-.place:hover {
-    background-color: #b3d4fc;
-    
+ .place:hover {
+     background-color: #b3d4fc;
 }
-
+ 
