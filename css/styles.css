@@ -31,4 +31,7 @@ html, body {
  .place:hover {
      background-color: #b3d4fc;
 }
- 
+/* font size changes base on device*/
+.topic {
+  font-size: 3vmin;
+}
