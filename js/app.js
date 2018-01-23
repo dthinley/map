@@ -20,8 +20,8 @@ var Location = function(data) {
 
     $.getJSON(foursquareURL).done(function(data) {
         var results = data.response.venues[0];
-        self.URL = results.url|| "No url found";
-        self.street = results.location.formattedAddress[0]|| "No address found";
+        self.URL = results.url || "No url found";
+        self.street = results.location.formattedAddress[0] || "No address found";
         self.city = results.location.formattedAddress[1] || "No address found";
         self.phone = results.contact.phone || "No phone found";
 
@@ -63,54 +63,53 @@ var Location = function(data) {
 
 //-ViewModel
 function AppViewModel() {
-        var self = this;
+    var self = this;
 
-        // create array of places
+    // create array of places
 
-        this.locationList = ko.observableArray([]);
-        this.searchLocation = ko.observable('');
+    this.locationList = ko.observableArray([]);
+    this.searchLocation = ko.observable('');
 
-        map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 12,
-            center: {
-                lat: 37.77986,
-                lng: -122.429
-            }
-        });
+    map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 12,
+        center: {
+            lat: 37.77986,
+            lng: -122.429
+        }
+    });
 
-        // ** Move the infoWindow from Location to AppViewModel.    
-        infoWindow = new google.maps.InfoWindow({
-            content: self.contentString
-        });
+    infoWindow = new google.maps.InfoWindow({
+        content: self.contentString
+    });
 
 
-        initialLocations.forEach(function(locationItem) {
-            // To each Location object, pass the same infoWindow object
-            self.locationList.push(new Location(locationItem, self.infoWindow));
-        });
+    initialLocations.forEach(function(locationItem) {
+        // To each Location object, pass the same infoWindow object
+        self.locationList.push(new Location(locationItem, self.infoWindow));
+    });
 
-        this.filteredList = ko.computed(function() {
-            var filter = self.searchLocation().toLowerCase();
-            if (!filter) {
-                self.locationList().forEach(function(locationItem) {
-                    locationItem.visible(true);
-                });
-                return self.locationList();
-            } else {
-                return ko.utils.arrayFilter(self.locationList(), function(locationItem) {
-                    var string = locationItem.name.toLowerCase();
-                    var result = (string.search(filter) >= 0);
-                    locationItem.visible(result);
-                    return result;
-                });
-            }
-        }, self);
+    this.filteredList = ko.computed(function() {
+        var filter = self.searchLocation().toLowerCase();
+        if (!filter) {
+            self.locationList().forEach(function(locationItem) {
+                locationItem.visible(true);
+            });
+            return self.locationList();
+        } else {
+            return ko.utils.arrayFilter(self.locationList(), function(locationItem) {
+                var string = locationItem.name.toLowerCase();
+                var result = (string.search(filter) >= 0);
+                locationItem.visible(result);
+                return result;
+            });
+        }
+    }, self);
 
-        this.mapElem = document.getElementById('map');
-        this.mapElem.style.height = window.innerHeight - 50;
-    }
+    this.mapElem = document.getElementById('map');
+    this.mapElem.style.height = window.innerHeight - 50;
+}
 
-    // Bind the VeiewModel to the view using knockout
+// Bind the VeiewModel to the view using knockout
 function startApp() {
     ko.applyBindings(new AppViewModel());
 }
