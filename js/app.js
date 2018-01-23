@@ -2,6 +2,7 @@
 //Foursquare clientid and clientSecret
 var clientID = "VZ2JT2MO24F4I1FISB1WHSM0UTMWCLMBF0GUVBBTOB5WXOAD";
 var clientSecret = "PQSBTUDULE4ML240LQKMH0EL5Y2SJQSDXNMKIQKJMGVCNMDH";
+
 var Location = function(data) {
     var self = this;
 
@@ -19,25 +20,13 @@ var Location = function(data) {
 
     $.getJSON(foursquareURL).done(function(data) {
         var results = data.response.venues[0];
-        self.URL = results.url;
-        self.street = results.location.formattedAddress[0];
-        self.city = results.location.formattedAddress[1];
-        self.phone = results.contact.phone;
+        self.URL = results.url|| "No url found";
+        self.street = results.location.formattedAddress[0]|| "No address found";
+        self.city = results.location.formattedAddress[1] || "No address found";
+        self.phone = results.contact.phone || "No phone found";
 
     }).fail(function() {
-        alert("Error found. Please refresh your page.");
-    });
-
-    // Info window
-
-    this.contentString = '<div class="info-window-content"><div class="title"><b>' + data.name + "</b></div>" +
-        '<div class="content"><a href="' + self.URL + '">' + self.URL + "</a></div>" +
-        '<div class="content">' + self.street + "</div>" +
-        '<div class="content">' + self.city + "</div>" +
-        '<div class="content">' + self.phone + "</div></div>";
-
-    this.infoWindow = new google.maps.InfoWindow({
-        content: self.contentString
+        alert("Error found. Unable to load the place.");
     });
 
     // Marker
@@ -48,25 +37,18 @@ var Location = function(data) {
         title: data.name
     });
 
-    this.showMarker = ko.computed(function() {
-        if (this.visible() === true) {
-            this.marker.setMap(map);
-        } else {
-            this.marker.setMap(null);
-        }
-        return true;
-    }, this);
-
+    //EventListener
     this.marker.addListener('click', function() {
         self.contentString = '<div class="info-window-content"><div class="title"><b>' + data.name + "</b></div>" +
             '<div class="content"><a href="' + self.URL + '">' + self.URL + "</a></div>" +
             '<div class="content">' + self.street + "</div>" +
             '<div class="content">' + self.city + "</div>" +
+            '<div class="content">' + self.photo + "</div>" +
             '<div class="content"><a href="tel:' + self.phone + '">' + self.phone + "</a></div></div>";
 
-        self.infoWindow.setContent(self.contentString);
+        infoWindow.setContent(self.contentString);
 
-        self.infoWindow.open(map, this);
+        infoWindow.open(map, this);
 
         self.marker.setAnimation(google.maps.Animation.BOUNCE);
         setTimeout(function() {
@@ -81,50 +63,58 @@ var Location = function(data) {
 
 //-ViewModel
 function AppViewModel() {
-    var self = this;
+        var self = this;
 
-    // create array of places
+        // create array of places
 
-    this.locationList = ko.observableArray([]);
-    this.searchLocation = ko.observable('');
+        this.locationList = ko.observableArray([]);
+        this.searchLocation = ko.observable('');
 
-    map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 12,
-        center: {
-            lat: 37.77986,
-            lng: -122.429
-        }
-    });
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 12,
+            center: {
+                lat: 37.77986,
+                lng: -122.429
+            }
+        });
 
-    initialLocations.forEach(function(locationItem) {
-        self.locationList.push(new Location(locationItem));
-    });
+        // ** Move the infoWindow from Location to AppViewModel.    
+        infoWindow = new google.maps.InfoWindow({
+            content: self.contentString
+        });
 
-    this.filteredList = ko.computed(function() {
-        var filter = self.searchLocation().toLowerCase();
-        if (!filter) {
-            self.locationList().forEach(function(locationItem) {
-                locationItem.visible(true);
-            });
-            return self.locationList();
-        } else {
-            return ko.utils.arrayFilter(self.locationList(), function(locationItem) {
-                var string = locationItem.name.toLowerCase();
-                var result = (string.search(filter) >= 0);
-                locationItem.visible(result);
-                return result;
-            });
-        }
-    }, self);
 
-    this.mapElem = document.getElementById('map');
-    this.mapElem.style.height = window.innerHeight - 50;
-}
-// Bind the VeiewModel to the view using knockout
+        initialLocations.forEach(function(locationItem) {
+            // To each Location object, pass the same infoWindow object
+            self.locationList.push(new Location(locationItem, self.infoWindow));
+        });
+
+        this.filteredList = ko.computed(function() {
+            var filter = self.searchLocation().toLowerCase();
+            if (!filter) {
+                self.locationList().forEach(function(locationItem) {
+                    locationItem.visible(true);
+                });
+                return self.locationList();
+            } else {
+                return ko.utils.arrayFilter(self.locationList(), function(locationItem) {
+                    var string = locationItem.name.toLowerCase();
+                    var result = (string.search(filter) >= 0);
+                    locationItem.visible(result);
+                    return result;
+                });
+            }
+        }, self);
+
+        this.mapElem = document.getElementById('map');
+        this.mapElem.style.height = window.innerHeight - 50;
+    }
+
+    // Bind the VeiewModel to the view using knockout
 function startApp() {
     ko.applyBindings(new AppViewModel());
 }
 
 function errorHandling() {
-    alert("Error loading page, try refresh in page.");
+    alert("Error loading page, try refresh your page and internet connection.");
 }
