@@ -3,6 +3,9 @@ This is a single page application featuring a map of top 10 locations in San Fra
 
 ![](images/screen.jpg)
 
+Live version can by view at: https://dthinley.github.io/map/.
+
+
 ## Libraries, frameworks and APIs used
 1. Knockout JS
 Knockout Js can be either downloaded from http://knockoutjs.com/ or can use CDN https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js
