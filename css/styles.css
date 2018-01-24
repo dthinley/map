@@ -5,14 +5,17 @@ body {
     padding: 0;
 }
 
+
 .map-canvas {
     height: 100%;
 }
+
 
 .search {
     margin: 8px;
     display: flex;
 }
+
 
 .search-box {
     display: flex;
@@ -20,14 +23,17 @@ body {
     padding: 5px 0px;
 }
 
+
 .list {
     list-style: none;
 }
+
 
 .results {
     margin: 5px;
     padding: 2px;
 }
+
 
 .place {
     margin: 2px;
@@ -36,6 +42,7 @@ body {
     cursor: pointer;
 }
 
+
 .place:hover {
     background-color: #b3d4fc;
 }
@@ -43,6 +50,8 @@ body {
 
 /* font size changes base on device*/
 
-.topic {
-    font-size: 3vmin;
+@media screen and (min-width: 75em) {
+  .topic {
+    font-size: 1.5em;
+  }
 }
