@@ -1,3 +1,4 @@
+
     var initialLocations = [{
             name: 'Golden Gate',
             lat: 37.819929,
