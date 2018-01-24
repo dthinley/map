@@ -40,6 +40,15 @@ var Location = function(data) {
         title: data.name
     });
 
+    this.showMarker = ko.computed(function () {
+        if (this.visible() === true) {
+            this.marker.setMap(map);
+        } else {
+            this.marker.setMap(null);
+        }
+        return true;
+    }, this);
+
     //EventListener
     this.marker.addListener('click', function() {
         self.contentString = '<div class="info-window-content"><div class="title"><b>' + data.name + "</b></div>" +
@@ -62,6 +71,8 @@ var Location = function(data) {
         google.maps.event.trigger(self.marker, 'click');
     };
 };
+
+
 
 //-ViewModel
 function AppViewModel() {
