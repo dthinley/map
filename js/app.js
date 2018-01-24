@@ -1,7 +1,10 @@
+'use strict';
 //global variables
+var map;
+var infoWindow;
 //Foursquare clientid and clientSecret
-var clientID = "VZ2JT2MO24F4I1FISB1WHSM0UTMWCLMBF0GUVBBTOB5WXOAD";
-var clientSecret = "PQSBTUDULE4ML240LQKMH0EL5Y2SJQSDXNMKIQKJMGVCNMDH";
+var clientID = "V443OTCAQPJLCRY4QWBFYN3ZK5FDKGJOYDHLMI3O342IRVNN";
+var	clientSecret = "AK1JHLEG2D2KW14WF5HYVFNTUYFTBXYS4LDUUNRAHPR5URLB";
 
 var Location = function(data) {
     var self = this;
@@ -63,6 +66,7 @@ var Location = function(data) {
 //-ViewModel
 function AppViewModel() {
     var self = this;
+    
 
     // create array of places
 
