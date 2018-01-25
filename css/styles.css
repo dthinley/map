@@ -28,6 +28,9 @@ body {
     list-style: none;
 }
 
+.list {
+  overflow-y: scroll;
+}
 
 .results {
     margin: 5px;
@@ -48,11 +51,11 @@ body {
 }
 
 
-.footer{
+.foursquare{
+    margin-top: 50px;
+    padding: 10px;
     background: #dee0e2;
-    padding: 20px;
     position: absolute;
-    bottom: 0;
     width: 100%;
 }
 
@@ -68,3 +71,4 @@ body {
     font-size: 1.5em;
   }
 }
+
