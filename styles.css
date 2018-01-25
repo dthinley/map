@@ -1,0 +1,75 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+
+.map-canvas {
+    height: 100%;
+}
+
+
+.search {
+    margin: 8px;
+    display: flex;
+}
+
+
+.search-box {
+    display: flex;
+    font-size: 14px;
+    padding: 5px 0px;
+}
+
+
+.list {
+    list-style: none;
+}
+
+
+.list {
+  overflow-y: scroll;
+}
+
+.results {
+    margin: 5px;
+    padding: 2px;
+}
+
+
+.place {
+    margin: 2px;
+    padding: 4px;
+    background-color: #eee;
+    cursor: pointer;
+}
+
+
+.place:hover {
+    background-color: #b3d4fc;
+}
+
+
+.foursquare{
+    margin-top: 50px;
+    padding: 10px;
+    background: #dee0e2;
+    position: absolute;
+    width: 100%;
+}
+
+
+.foursquare-logo{
+    height: 25px;
+}
+
+/* font size changes base on device*/
+
+@media screen and (min-width: 75em) {
+  .topic {
+    font-size: 1.5em;
+  }
+}
+
