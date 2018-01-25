@@ -3,8 +3,8 @@
 var map;
 var infoWindow;
 //Foursquare clientid and clientSecret
-var clientID = "42ITZKVEY5AIIHWENOHIF1CXCCXYS1VPU4V0VSRWYDTYZNM5";
-var clientSecret = "MGNJU45QOQKYTCYVUVQTW5KPGEZEI2BUE4UYZEIRGKJIOHPE";
+var clientID = "D2GUCKJP4VMFZBHN3ZAL3WX2LNFDLARDD4HS5FG3IAJBRV4B";
+var clientSecret = "2JUH3GZ3D1XDCG5R0WK5BPZHYAKYLNUCGXP4DY2ZOJWIIWO0";
 
 var Location = function(data) {
     var self = this;
@@ -40,15 +40,6 @@ var Location = function(data) {
         title: data.name
     });
 
-    this.showMarker = ko.computed(function () {
-        if (this.visible() === true) {
-            this.marker.setMap(map);
-        } else {
-            this.marker.setMap(null);
-        }
-        return true;
-    }, this);
-
     //EventListener
     this.marker.addListener('click', function() {
         self.contentString = '<div class="info-window-content"><div class="title"><b>' + data.name + "</b></div>" +
@@ -71,8 +62,6 @@ var Location = function(data) {
         google.maps.event.trigger(self.marker, 'click');
     };
 };
-
-
 
 //-ViewModel
 function AppViewModel() {
@@ -106,14 +95,14 @@ function AppViewModel() {
         var filter = self.searchLocation().toLowerCase();
         if (!filter) {
             self.locationList().forEach(function(locationItem) {
-                locationItem.visible(true);
+                locationItem.marker.setVisible(true);
             });
             return self.locationList();
         } else {
             return ko.utils.arrayFilter(self.locationList(), function(locationItem) {
                 var string = locationItem.name.toLowerCase();
                 var result = (string.search(filter) >= 0);
-                locationItem.visible(result);
+                 locationItem.marker.setVisible(result);
                 return result;
             });
         }
