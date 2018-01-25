@@ -48,6 +48,19 @@ body {
 }
 
 
+.footer{
+    background: #dee0e2;
+    padding: 20px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+
+.foursquare-logo{
+    height: 25px;
+}
+
 /* font size changes base on device*/
 
 @media screen and (min-width: 75em) {
