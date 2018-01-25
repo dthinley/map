@@ -1,4 +1,4 @@
-"use strict";
+
 //global variables
 var map;
 var infoWindow;
